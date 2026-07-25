@@ -25,14 +25,15 @@ KRC 농촌용수 저수지 수위 원자료를 지역 기반 위험 근거·동�
 ### HTTPS 공개(Cloudflare Pages) 전환·정리  <!-- (2026-07-25) -->
 
 - 상위망이 80/443 인입을 막아 오리진 직접 HTTPS(LE)가 불가 → Cloudflare Pages + Functions로 `https://mulsallim-ai.pages.dev` 고정 HTTPS 확보. Function `/api/*`가 오리진으로 서버간 프록시.
-- **배포 블로커 A(미해결·서버작업 필요):** Function→오리진 `/api`가 HTTP 522. Cloudflare가 비표준 포트 4184에 도달 못 함 → cloudflared 터널 필요. 상세: [[34_심사표_100점_자가진단_및_배포블로커_20260725]]
+- **배포 블로커 A(해결):** Function→오리진 `/api` HTTP 522(비표준 포트 4184 도달불가)는 로컬 PC `cloudflared` 빠른 터널로 오리진 앞에 HTTPS를 두고 Function origin을 그 주소로 바꿔 해결. HTTPS 전 흐름(저수율·그래프·AI) 검증 완료. ⚠️ 임시 터널이라 PowerShell 창 유지 필요, 재시작 시 주소 변경. 영구화는 오리진 named tunnel. 상세: [[34_심사표_100점_자가진단_및_배포블로커_20260725]]
 - **블로커 B(해결):** Pages CSP가 `unsafe-eval` 미허용인데 라이브 로더 3종이 `eval` 사용 → 지역선택 폼이 빈 채로 떴음. `build-pages.mjs`에서 eval을 `<script>` 주입으로 대체(빌드 시점 해석), 엄격 CSP 유지. HTTPS에서 지역선택 정상 복구 검증(시·도 18개).
 - 러시안인형 버전 파일(v2~v11 등) 102개 삭제, 라이브 v12 세트만 유지. 낡은 역링크(v8/v9/v10) v12로 교정.
 - 관련: [[배포 운영]]
 
 ## 다음 할 일
 
-- [ ] **(최우선) 배포 블로커 A:** 오리진에서 cloudflared 터널 → Pages env `MULSALLIM_ORIGIN` 갱신 → HTTPS 전 흐름 스모크 테스트
+- [x] 배포 블로커 A: cloudflared 터널로 HTTPS 전 흐름 복구·검증 (로컬 임시 터널)
+- [ ] 터널 영구화: 오리진 서버에서 named tunnel + `cloudflared service install`
 - [ ] 강수량·가뭄 단계·용수 수요 특성을 추가한 예측 후보를 같은 기준으로 재검증
 - [ ] KRC/지자체 담당자와 5~10개 저수지 시범 사용성 검증
 - [ ] 잠재버그: `/api/krc/reservoir-codes`(지역 비교 버튼)가 서버 v4에 미구현 → 404. 구현 또는 버튼 정리
