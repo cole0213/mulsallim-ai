@@ -1,6 +1,8 @@
-// Cloudflare Workers/Pages fetch()는 raw IP subrequest를 거부한다(error 1003).
-// 반드시 호스트명을 쓴다. nmlab16.korea.ac.kr = 163.152.223.16 (정방향 DNS 공개).
-const DEFAULT_ORIGIN='http://nmlab16.korea.ac.kr:4184';
+// Cloudflare Pages fetch()는 오리진의 비표준 포트(4184)에 도달하지 못해 522가 난다.
+// 오리진(nmlab16:4184) 앞에 cloudflared 빠른 터널을 두고 그 HTTPS(443) 주소로 프록시한다.
+// 터널 주소는 cloudflared 프로세스가 살아있는 동안 유지된다. 재시작 시 이 값 갱신 필요.
+// (더 안정적으로는 Pages 환경변수 MULSALLIM_ORIGIN 설정 — 코드보다 우선 적용됨.)
+const DEFAULT_ORIGIN='https://simultaneously-beta-garden-dishes.trycloudflare.com';
 
 export async function onRequest(context){
   const {request,env}=context;
