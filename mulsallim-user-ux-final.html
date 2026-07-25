@@ -1,3 +1,0 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>물살림 AI | 우리 지역 농업용수</title></head><body><div id="app"></div><script>
-(async()=>{let raw=await fetch('mulsallim-user.html').then(r=>r.text());raw=raw.replaceAll('mulsallim-service.html','mulsallim-service-ux-final.html');const parsed=new DOMParser().parseFromString(raw,'text/html');document.head.innerHTML+=parsed.head.innerHTML;document.getElementById('app').innerHTML=parsed.body.innerHTML;const x=document.createElement('script');x.src='mulsallim-home-recent.js';document.body.append(x)})().catch(e=>document.getElementById('app').textContent='서비스를 불러오지 못했습니다: '+e.message);
-</script></body></html>

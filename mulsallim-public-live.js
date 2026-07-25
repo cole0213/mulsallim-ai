@@ -1,9 +1,0 @@
-(()=>{
- const provinces=['강원특별자치도','경기도','경상남도','경상북도','광주광역시','대구광역시','대전광역시','부산광역시','서울특별시','세종특별자치시','울산광역시','인천광역시','전라남도','전북특별자치도','제주특별자치도','충청남도','충청북도'];
- const p=document.querySelector('#province'),c=document.querySelector('#city'),go=document.querySelector('#go');
- p.innerHTML='<option value="">시·도 선택</option>'+provinces.map(x=>`<option value="${x}">${x}</option>`).join('');
- async function cities(){const v=p.value;c.disabled=true;c.innerHTML='<option>시·군·구 불러오는 중…</option>';try{const r=await fetch('/api/krc/reservoir-codes?'+new URLSearchParams({county:v})),d=await r.json();if(!r.ok)throw Error(d.detail||d.error);const xs=[...new Set((d.items||[]).map(x=>String(x.county||'').replace(v,'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ko'));c.innerHTML='<option value="">시·군·구 선택</option>'+xs.map(x=>`<option value="${x.replace(/&/g,'&amp;').replace(/"/g,'&quot;')}">${x}</option>`).join('');c.disabled=false;return xs}catch(e){c.innerHTML='<option value="">목록을 불러오지 못했습니다</option>';c.disabled=false;return []}}
- p.onchange=()=>{if(p.value)cities();else{c.innerHTML='<option value="">시·군·구 선택</option>';c.disabled=false}};
- go.onclick=()=>{if(!p.value||!c.value){alert('시·도와 시·군·구를 모두 선택해 주세요.');return}location.href=`mulsallim-dashboard-live.html?province=${encodeURIComponent(p.value)}&city=${encodeURIComponent(c.value)}`};
- try{const favs=JSON.parse(localStorage.getItem('mulsallim-favorites')||'[]'),recent=JSON.parse(localStorage.getItem('mulsallim-recent')||'null'),all=[];if(recent)all.push(recent);favs.forEach(x=>{if(!all.some(y=>y.code===x.code))all.push(x)});if(all.length){const root=document.querySelector('#saved'),list=document.querySelector('#savedList');root.hidden=false;list.innerHTML=all.map(x=>`<a href="mulsallim-dashboard-live.html?code=${encodeURIComponent(x.code)}&name=${encodeURIComponent(x.name)}&place=${encodeURIComponent(x.place)}">${x.name} · ${x.place}</a>`).join('')}}catch{}
-})();
