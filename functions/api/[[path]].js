@@ -1,4 +1,6 @@
-const DEFAULT_ORIGIN='http://163.152.223.16:4184';
+// Cloudflare Workers/Pages fetch()는 raw IP subrequest를 거부한다(error 1003).
+// 반드시 호스트명을 쓴다. nmlab16.korea.ac.kr = 163.152.223.16 (정방향 DNS 공개).
+const DEFAULT_ORIGIN='http://nmlab16.korea.ac.kr:4184';
 
 export async function onRequest(context){
   const {request,env}=context;
