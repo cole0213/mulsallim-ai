@@ -1,0 +1,25 @@
+name: mulsallim-ai
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mulsallim-ai:v12
+    container_name: mulsallim-ai
+    restart: unless-stopped
+    env_file:
+      - ../../.env
+    environment:
+      PORT: "4184"
+      RUNTIME_DIR: /data
+    ports:
+      - "4184:4184"
+    volumes:
+      - ../../runtime:/data
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4184/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s

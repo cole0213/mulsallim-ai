@@ -1,0 +1,12 @@
+.env
+.git
+.gitignore
+node_modules
+server/*.log
+server/action-cards.json
+server/pilot-feedback.json
+__pycache__
+server/__pycache__
+deliverables
+docs
+*.docx

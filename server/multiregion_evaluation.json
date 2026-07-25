@@ -1,0 +1,229 @@
+{
+  "generatedAt": "2026-07-24T22:42:04.705731+09:00",
+  "purpose": "Multi-reservoir time-split evidence for field-check prioritization; not a drought forecast deployment claim.",
+  "source": "KRC 농촌용수 저수지 수위정보 API via local production proxy",
+  "coverage": {
+    "reservoirs": 18,
+    "regions": [
+      "강원",
+      "경기",
+      "경남",
+      "경북",
+      "전남",
+      "전북",
+      "제주",
+      "충남",
+      "충북"
+    ],
+    "observations": 6588,
+    "trainExamples": 4428,
+    "testExamples": 1908,
+    "positiveRateTest": 0.1703
+  },
+  "definition": {
+    "event": "storage rate decreases by at least 5 percentage points seven calendar days later",
+    "split": "first 70% chronological examples per reservoir for training; remaining 30% for held-out test",
+    "features": [
+      "current storage rate",
+      "7-day slope",
+      "7-day daily-change volatility"
+    ]
+  },
+  "forecastComparison": {
+    "persistenceMae": 3.525,
+    "trendProjectionMae": 4.198,
+    "decision": "trend projection is not deployed unless it beats persistence robustly across expanded data"
+  },
+  "fieldCheckSignal": {
+    "baseline": "current storage rate at or below 50%",
+    "candidate": "regularized logistic signal trained on three transparent features",
+    "thresholdSelectedOnTraining": 0.1,
+    "baselineHeldout": {
+      "threshold": 0.5,
+      "tp": 10,
+      "fp": 165,
+      "tn": 1418,
+      "fn": 315,
+      "precision": 0.0571,
+      "recall": 0.0308,
+      "f1": 0.04,
+      "alertRate": 0.0917
+    },
+    "candidateHeldout": {
+      "threshold": 0.1,
+      "tp": 12,
+      "fp": 51,
+      "tn": 1532,
+      "fn": 313,
+      "precision": 0.1905,
+      "recall": 0.0369,
+      "f1": 0.0619,
+      "alertRate": 0.033
+    },
+    "decision": "candidate may only be called a field-check prioritization signal; no automatic alert or official drought judgment"
+  },
+  "perReservoir": [
+    {
+      "facilityCode": "4211010001",
+      "facilityName": "우두",
+      "region": "강원",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    },
+    {
+      "facilityCode": "4211010006",
+      "facilityName": "지내",
+      "region": "강원",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    },
+    {
+      "facilityCode": "4111010005",
+      "facilityName": "일월",
+      "region": "경기",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    },
+    {
+      "facilityCode": "4113010005",
+      "facilityName": "낙생",
+      "region": "경기",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    },
+    {
+      "facilityCode": "4811010022",
+      "facilityName": "가월",
+      "region": "경남",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    },
+    {
+      "facilityCode": "4811010029",
+      "facilityName": "동면봉곡",
+      "region": "경남",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    },
+    {
+      "facilityCode": "4711010003",
+      "facilityName": "삼정(삼정리)",
+      "region": "경북",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    },
+    {
+      "facilityCode": "4711010068",
+      "facilityName": "강사",
+      "region": "경북",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    },
+    {
+      "facilityCode": "4611010005",
+      "facilityName": "석현",
+      "region": "전남",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    },
+    {
+      "facilityCode": "4613010004",
+      "facilityName": "여천",
+      "region": "전남",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    },
+    {
+      "facilityCode": "4511010037",
+      "facilityName": "은석",
+      "region": "전북",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    },
+    {
+      "facilityCode": "4511010050",
+      "facilityName": "인교",
+      "region": "전북",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    },
+    {
+      "facilityCode": "4413010010",
+      "facilityName": "천호",
+      "region": "충남",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    },
+    {
+      "facilityCode": "4413010016",
+      "facilityName": "문암",
+      "region": "충남",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    },
+    {
+      "facilityCode": "4311010006",
+      "facilityName": "용정",
+      "region": "충북",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    },
+    {
+      "facilityCode": "4311110011",
+      "facilityName": "삼산",
+      "region": "충북",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    },
+    {
+      "facilityCode": "5011010006",
+      "facilityName": "동명",
+      "region": "제주",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    },
+    {
+      "facilityCode": "5011010004",
+      "facilityName": "상대",
+      "region": "제주",
+      "trainExamples": 246,
+      "testExamples": 106,
+      "observations": 366
+    }
+  ],
+  "model": {
+    "weights": [
+      -2.933804,
+      -0.212678,
+      0.087206,
+      0.262755
+    ],
+    "means": [
+      78.968557,
+      0.03404,
+      0.841445
+    ],
+    "scales": [
+      16.833588,
+      0.878807,
+      2.051946
+    ]
+  }
+}

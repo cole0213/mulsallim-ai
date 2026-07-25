@@ -1,0 +1,14 @@
+{
+  "algorithm": "Isolation Forest (dependency-free)",
+  "purpose": "recent reservoir transition pattern anomaly evidence, not drought forecast",
+  "features": [
+    "storage rate",
+    "7-day slope",
+    "mean absolute daily change"
+  ],
+  "trainingRows": 358,
+  "latestDate": "20260724",
+  "anomalyScore": 0.505,
+  "historicalPercentile": 76.0,
+  "interpretation": "higher score means the latest 7-day pattern is rarer in this reservoir history"
+}

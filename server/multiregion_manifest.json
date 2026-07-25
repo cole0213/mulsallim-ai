@@ -1,0 +1,20 @@
+[
+  {"facilityCode":"4211010001","facilityName":"우두","county":"강원특별자치도 춘천시","region":"강원"},
+  {"facilityCode":"4211010006","facilityName":"지내","county":"강원특별자치도 춘천시","region":"강원"},
+  {"facilityCode":"4111010005","facilityName":"일월","county":"경기도 수원시","region":"경기"},
+  {"facilityCode":"4113010005","facilityName":"낙생","county":"경기도 성남시","region":"경기"},
+  {"facilityCode":"4811010022","facilityName":"가월","county":"경상남도 창원시","region":"경남"},
+  {"facilityCode":"4811010029","facilityName":"동면봉곡","county":"경상남도 창원시","region":"경남"},
+  {"facilityCode":"4711010003","facilityName":"삼정(삼정리)","county":"경상북도 포항시","region":"경북"},
+  {"facilityCode":"4711010068","facilityName":"강사","county":"경상북도 포항시","region":"경북"},
+  {"facilityCode":"4611010005","facilityName":"석현","county":"전남광주통합특별시 목포시","region":"전남"},
+  {"facilityCode":"4613010004","facilityName":"여천","county":"전남광주통합특별시 여수시","region":"전남"},
+  {"facilityCode":"4511010037","facilityName":"은석","county":"전북특별자치도 전주시","region":"전북"},
+  {"facilityCode":"4511010050","facilityName":"인교","county":"전북특별자치도 전주시","region":"전북"},
+  {"facilityCode":"4413010010","facilityName":"천호","county":"충청남도 천안시","region":"충남"},
+  {"facilityCode":"4413010016","facilityName":"문암","county":"충청남도 천안시","region":"충남"},
+  {"facilityCode":"4311010006","facilityName":"용정","county":"충청북도 청주시","region":"충북"},
+  {"facilityCode":"4311110011","facilityName":"삼산","county":"충청북도 청주시","region":"충북"},
+  {"facilityCode":"5011010006","facilityName":"동명","county":"제주특별자치도 제주시","region":"제주"},
+  {"facilityCode":"5011010004","facilityName":"상대","county":"제주특별자치도 제주시","region":"제주"}
+]

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>물살림 AI | 모델카드와 검증 원칙</title>
+  <style>
+    :root{--ink:#163d3a;--deep:#104641;--teal:#087a77;--line:#c8ded5;--paper:#f4f8f6;--muted:#58716c;--warn:#8a5a15}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px system-ui,'Malgun Gothic',sans-serif;line-height:1.7}.top{background:var(--deep);color:white;padding:18px max(20px,calc((100% - 900px)/2));font-weight:900;font-size:20px}.top b{color:#a9dec9}.page{max-width:900px;margin:42px auto 80px;padding:0 20px}.hero,.section{background:white;border:1px solid var(--line);padding:28px;margin-top:12px}.eyebrow{font-size:11px;font-weight:900;letter-spacing:.13em;color:var(--teal);margin:0 0 8px}h1{font-size:38px;line-height:1.2;letter-spacing:-.06em;margin:0 0 10px}h2{font-size:22px;letter-spacing:-.04em;margin:0 0 10px}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.item{padding:16px;background:#f4f8f6;border-left:3px solid var(--teal)}.item.warn{border-left-color:var(--warn)}.item b,.item span{display:block}.item span{font-size:14px;color:var(--muted);margin-top:5px}.table{width:100%;border-collapse:collapse;font-size:14px}.table th,.table td{border-bottom:1px solid #d9e8e2;padding:11px;text-align:left;vertical-align:top}.table th{width:31%;background:#f4f8f6}.notice{padding:14px 16px;background:#fff3e7;border-left:4px solid var(--warn);font-size:14px}.foot{font-size:13px;color:var(--muted)}a{color:#086f6b;font-weight:800}@media(max-width:650px){.grid{grid-template-columns:1fr}h1{font-size:31px}.hero,.section{padding:21px}.table th{width:38%}}
+  </style>
+</head>
+<body>
+  <header class="top">물살림 <b>AI</b> · 모델카드</header>
+  <main class="page">
+    <section class="hero">
+      <p class="eyebrow">TRANSPARENCY BEFORE AUTOMATION</p>
+      <h1>‘예측’보다 먼저, 확인 가능한 근거를 제공합니다.</h1>
+      <p class="muted">물살림 AI는 KRC 공개 저수지 수위정보를 바탕으로 변화 신호와 현장 확인 우선순위를 보여주는 의사결정 보조 서비스입니다. 자동 급수·공식 가뭄 경보·행정 처분을 수행하지 않습니다.</p>
+    </section>
+    <section class="section">
+      <h2>1. 현재 배포 기능</h2>
+      <div class="grid">
+        <article class="item"><b>설명 가능한 전환 신호</b><span>최신 저수율, 7일 변화, 관측 연속성의 근거를 화면에 함께 표시합니다.</span></article>
+        <article class="item"><b>현장 행동 제안</b><span>위험 신호가 있으면 관측 재확인·급수 전환 검토 등 ‘다음 확인’ 중심으로 안내합니다.</span></article>
+        <article class="item"><b>지역 기반 조회</b><span>시·도와 시·군·구를 선택하면 이용자가 저수지 코드를 알 필요 없이 KRC 데이터로 연결됩니다.</span></article>
+        <article class="item"><b>협의 카드</b><span>개인정보 없이 같은 근거와 현장 확인 상태를 30일간 공유합니다.</span></article>
+      </div>
+    </section>
+    <section class="section">
+      <h2>2. 검증한 것과 배포에서 제외한 것</h2>
+      <table class="table"><tbody>
+        <tr><th>오프라인 탐색</th><td>탑정저수지 365일 관측 이력으로 Isolation Forest 기반 전환 패턴 탐색을 수행했습니다. 입력은 저수율, 7일 기울기, 일별 변동성입니다.</td></tr>
+        <tr><th>탐색 결과의 의미</th><td>최근 패턴이 해당 저수지의 과거 패턴 중 얼마나 드문지 확인하는 보조 근거입니다. 가뭄 발생이나 미래 저수율을 예측하는 모델이 아닙니다.</td></tr>
+        <tr><th>예측 모델 평가</th><td>7일 후 저수율 예측 후보는 기준선보다 성능이 낮아 배포에서 제외했습니다. 성능 미달 모델을 화면의 ‘AI 예측’으로 표현하지 않습니다.</td></tr>
+        <tr><th>현재의 안전장치</th><td>공식 경보를 대체하지 않음, 자동 의사결정 금지, 원자료·관측일 표시, 현장 확인 후 사람의 상태 갱신을 적용합니다.</td></tr>
+      </tbody></table>
+      <p class="notice"><b>중요:</b> 이 서비스의 위험 단계는 현장 점검 우선순위입니다. 농업용수 공급·급수 전환·공식 가뭄 판단은 KRC 및 관계기관의 공식 절차와 현장 확인을 따라야 합니다.</p>
+    </section>
+    <section class="section">
+      <h2>3. 다음 검증 게이트</h2>
+      <div class="grid">
+        <article class="item warn"><b>데이터 확장</b><span>저수율 외 강수, 유역·수요, 급수·가뭄 이력 등 시계열을 결합하고 지역·계절별 누수를 막습니다.</span></article>
+        <article class="item warn"><b>시간 분리 검증</b><span>과거 학습·미래 검증을 엄격히 분리하고, 기준선 대비 정밀도·재현율·오경보율을 공개합니다.</span></article>
+        <article class="item warn"><b>현장 파일럿</b><span>실제 확인 카드의 확인 완료율, 행동까지 걸린 시간, 불필요 경보율을 측정합니다.</span></article>
+        <article class="item warn"><b>배포 기준</b><span>사전 정의한 성능 기준을 충족할 때만 예측 기능을 제한적으로 추가하고, 미달이면 계속 보류합니다.</span></article>
+      </div>
+    </section>
+    <p class="foot">최종 갱신: 2026-07-24 · 데이터 출처: 한국농어촌공사 농촌용수 저수지 수위정보(KRC 공공데이터)</p>
+    <p class="foot"><a href="mulsallim-public-county-v5.html">지역 선택 화면으로 돌아가기</a></p>
+  </main>
+</body>
+</html>

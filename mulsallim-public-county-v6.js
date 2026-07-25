@@ -1,0 +1,1 @@
+(()=>{const original='mulsallim-dashboard-county-v5.html';document.addEventListener('click',e=>{const a=e.target.closest('a[href]');if(a&&a.getAttribute('href')===original)a.setAttribute('href','mulsallim-dashboard-county-v6.html')},true);})();

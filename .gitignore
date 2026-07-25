@@ -1,0 +1,17 @@
+# Secrets and local runtime state
+.env
+.env.*
+!.env.example
+server/action-cards.json
+server/pilot-feedback.json
+
+# Local process output
+*.stdout.log
+*.stderr.log
+*.log
+
+# Dependency/build artifacts
+node_modules/
+.wrangler/
+.dev.vars
+.DS_Store
