@@ -38,9 +38,9 @@ function renderChart(a){const svg=$('#chart'),an=lastAnalysis,w=1000,h=370,L=64,
  const fmt=s=>`${s.slice(4,6)}.${s.slice(6,8)}`,xl=(day,txt,anc)=>`<text x="${X(day).toFixed(1)}" y="${h-B+18}" font-size="11" text-anchor="${anc}" fill="#66807a">${txt}</text>`;
  const xlabels=xl(0,fmt(a[0].checkDate),'start')+xl(obsDays,'오늘',falling&&fcDays>0?'middle':'end')+(falling&&fcDays>0?xl(totalDays,`+${Math.round(fcDays)}일`,'end'):'');
  const todayMark=`<line x1="${todayX.toFixed(1)}" x2="${todayX.toFixed(1)}" y1="${T}" y2="${h-B}" stroke="#aebfb8" stroke-dasharray="3 3"/>`;
- const area=`<path d="M ${pts[0][0].toFixed(1)} ${h-B} ${pts.map(p=>'L '+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ')} L ${pts.at(-1)[0].toFixed(1)} ${h-B}Z" fill="#62c0b233"/>`;
+ const area=`<path d="M ${pts[0][0].toFixed(1)} ${h-B} ${pts.map(p=>'L '+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ')} L ${pts.at(-1)[0].toFixed(1)} ${h-B}Z" fill="url(#cfill)"/>`;
  const dots=pts.map((p,i)=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${i===pts.length-1?5:3}" fill="#087a77"/>`).join('');
- svg.innerHTML=`${grid}${thr(50,'#9b6515','관심')}${thr(35,'#b83f39','주의')}${todayMark}${area}${fc}<path d="${line}" fill="none" stroke="#087a77" stroke-width="3.5"/>${dots}${xlabels}`;
+ svg.innerHTML=`<defs><linearGradient id="cfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#62c0b2" stop-opacity=".42"/><stop offset="1" stop-color="#62c0b2" stop-opacity=".04"/></linearGradient></defs>${grid}${thr(50,'#9b6515','관심')}${thr(35,'#b83f39','주의')}${todayMark}${area}${fc}<path d="${line}" fill="none" stroke="#087a77" stroke-width="3.5"/>${dots}${xlabels}`;
  const tip=$('#tooltip'),box=svg.getBoundingClientRect();
  svg.onpointermove=e=>{const x=(e.clientX-box.left)/box.width*w;const i=pts.reduce((best,p,j)=>Math.abs(p[0]-x)<Math.abs(pts[best][0]-x)?j:best,0),it=a[i];tip.innerHTML=`<b>${it.checkDate}</b><br>저수율 ${it.storageRate.toFixed(1)}%<br>수위 ${it.waterLevelM.toFixed(2)}m`;tip.hidden=false;tip.style.left=Math.min(box.width-155,Math.max(0,e.clientX-box.left+14))+'px';tip.style.top=Math.max(55,e.clientY-box.top-12)+'px'};
  svg.onpointerleave=()=>tip.hidden=true}
