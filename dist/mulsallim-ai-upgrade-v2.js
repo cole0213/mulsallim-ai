@@ -1,1 +1,0 @@
-(()=>{const upgrade=()=>{const link=document.querySelector('#aiGovernanceCard .ai-card-link');if(!link||link.dataset.multiregion)return;link.dataset.multiregion='yes';link.href='mulsallim-ai-model-card-v3.html';link.textContent='다지역 모델카드와 검증 결과 보기 →'};new MutationObserver(upgrade).observe(document.body,{childList:true,subtree:true});upgrade()})();
