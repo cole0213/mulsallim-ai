@@ -1,0 +1,1 @@
+(function(){var s=document.createElement('script');s.src="mulsallim-action-card.built.js";(document.body||document.documentElement).appendChild(s);})();
